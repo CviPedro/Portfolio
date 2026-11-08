@@ -1,0 +1,631 @@
+:root {
+  --bg: #08070c;
+  --surface: #110f18;
+  --line: #2a2539;
+  --text: #ece8f6;
+  --muted: #a39cb8;
+  --violet: #8b5cf6;
+  --violet-soft: #b9a2fb;
+  --violet-button: #a78bfa;
+
+  --font-display: "Bricolage Grotesque", system-ui, sans-serif;
+  --font-body: "Instrument Sans", system-ui, sans-serif;
+
+  --rail-x: 28px;
+  --content-left: 84px;
+  --gutter-right: 24px;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--text);
+  font-family: var(--font-body);
+  font-size: 1.0625rem;
+  line-height: 1.65;
+  -webkit-font-smoothing: antialiased;
+  overflow-x: clip;
+}
+
+h1,
+h2,
+h3,
+p,
+ul {
+  margin: 0;
+}
+
+ul {
+  padding: 0;
+  list-style: none;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+:focus-visible {
+  outline: 2px solid var(--violet-soft);
+  outline-offset: 3px;
+  border-radius: 4px;
+}
+
+/* ---------- Animação: entra deslizando da esquerda ---------- */
+
+.reveal {
+  opacity: 0;
+  transform: translateX(-56px);
+  transition:
+    opacity 0.7s cubic-bezier(0.2, 0.7, 0.2, 1) var(--delay, 0ms),
+    transform 0.7s cubic-bezier(0.2, 0.7, 0.2, 1) var(--delay, 0ms);
+}
+
+.reveal.is-visible {
+  opacity: 1;
+  transform: none;
+}
+
+/* ---------- Linha lateral ---------- */
+
+.rail {
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  left: var(--rail-x);
+  width: 2px;
+  background: var(--line);
+  z-index: 30;
+}
+
+.rail-fill {
+  height: 100%;
+  background: var(--violet);
+  transform: scaleY(0);
+  transform-origin: top;
+  box-shadow: 0 0 14px 1px rgba(139, 92, 246, 0.55);
+}
+
+/* ---------- Cabeçalho ---------- */
+
+.header {
+  position: sticky;
+  top: 0;
+  z-index: 20;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 24px;
+  padding: 16px var(--gutter-right) 16px var(--content-left);
+  background: rgba(8, 7, 12, 0.78);
+  backdrop-filter: blur(10px);
+  border-bottom: 1px solid var(--line);
+}
+
+.header-name {
+  font-family: var(--font-display);
+  font-weight: 600;
+  letter-spacing: -0.01em;
+}
+
+.nav {
+  display: flex;
+  gap: 28px;
+}
+
+.nav-link {
+  color: var(--muted);
+  font-size: 0.95rem;
+  transition: color 0.2s;
+}
+
+.nav-link:hover {
+  color: var(--text);
+}
+
+/* ---------- Estrutura ---------- */
+
+.page {
+  padding: 0 var(--gutter-right) 0 var(--content-left);
+}
+
+.container {
+  max-width: 980px;
+}
+
+.section {
+  scroll-margin-top: 60px;
+  padding: 96px 0;
+  border-top: 1px solid var(--line);
+}
+
+.section-title {
+  margin-bottom: 40px;
+  font-family: var(--font-display);
+  font-size: clamp(2rem, 5vw, 3rem);
+  font-weight: 600;
+  letter-spacing: -0.03em;
+  line-height: 1.1;
+}
+
+/* ---------- Início ---------- */
+
+.hero {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+  gap: 24px;
+  min-height: calc(100vh - 62px);
+  padding: 64px 0;
+}
+
+.hero-name {
+  font-family: var(--font-display);
+  font-size: clamp(3.25rem, 12vw, 8.5rem);
+  font-weight: 700;
+  letter-spacing: -0.04em;
+  line-height: 0.95;
+}
+
+.hero-role {
+  color: var(--violet-soft);
+  font-family: var(--font-display);
+  font-size: clamp(1.25rem, 3vw, 1.75rem);
+  font-weight: 500;
+}
+
+.hero-text {
+  max-width: 46ch;
+  color: var(--muted);
+}
+
+.hero-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-top: 8px;
+}
+
+.btn {
+  display: inline-block;
+  padding: 12px 20px;
+  border: 1px solid transparent;
+  border-radius: 10px;
+  font-weight: 500;
+  transition:
+    background 0.2s,
+    border-color 0.2s;
+}
+
+.btn-primary {
+  background: var(--violet-button);
+  color: #0c0716;
+}
+
+.btn-primary:hover {
+  background: #c4b5fd;
+}
+
+.btn-secondary {
+  border-color: var(--line);
+  color: var(--text);
+}
+
+.btn-secondary:hover {
+  border-color: var(--violet);
+}
+
+/* ---------- Sobre ---------- */
+
+.about-text {
+  display: grid;
+  gap: 18px;
+  max-width: 62ch;
+  font-size: 1.15rem;
+}
+
+/* ---------- Tecnologias ---------- */
+
+.stack-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 40px 32px;
+}
+
+.group-title {
+  margin-bottom: 16px;
+  font-family: var(--font-display);
+  font-size: 1.2rem;
+  font-weight: 600;
+}
+
+.tag-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.tag {
+  padding: 4px 12px;
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  color: var(--violet-soft);
+  font-size: 0.9rem;
+  line-height: 1.5;
+}
+
+.languages {
+  margin-top: 56px;
+}
+
+.language-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px 40px;
+}
+
+.language {
+  display: flex;
+  flex-direction: column;
+}
+
+.language-level {
+  color: var(--muted);
+  font-size: 0.95rem;
+}
+
+/* ---------- Projetos ---------- */
+
+.projects-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 20px;
+}
+
+.span-all {
+  grid-column: 1 / -1;
+}
+
+.slot {
+  display: flex;
+}
+
+.slot > .project-card {
+  flex: 1;
+}
+
+.project-card {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 16px;
+  padding: 28px;
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: 16px;
+  cursor: pointer;
+  transition: border-color 0.2s;
+}
+
+.project-card:hover {
+  border-color: var(--violet);
+}
+
+.project-title {
+  font-family: var(--font-display);
+  font-size: 1.75rem;
+  font-weight: 600;
+  letter-spacing: -0.02em;
+  line-height: 1.15;
+}
+
+.project-summary {
+  max-width: 60ch;
+  color: var(--muted);
+}
+
+.status {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  color: var(--muted);
+  font-size: 0.9rem;
+}
+
+.status::before {
+  content: "";
+  width: 10px;
+  height: 10px;
+  border: 2px solid var(--violet);
+  border-radius: 50%;
+}
+
+.status--finalizado::before {
+  background: var(--violet);
+}
+
+.card-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px 24px;
+  margin-top: auto;
+  padding-top: 8px;
+  justify-content: center;
+}
+
+.link {
+  color: var(--violet-soft);
+  text-decoration: underline;
+  text-decoration-color: transparent;
+  text-underline-offset: 4px;
+  transition: text-decoration-color 0.2s;
+}
+
+.link:hover {
+  text-decoration-color: var(--violet-soft);
+}
+
+/* ---------- Imagens do card ---------- */
+
+.gallery {
+  display: grid;
+  gap: 10px;
+  width: 100%;
+}
+
+.gallery--wide {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
+.gallery--tall {
+  grid-template-columns: repeat(3, minmax(0, 150px));
+}
+
+.thumb {
+  display: block;
+  width: 100%;
+  background: var(--bg);
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  object-fit: cover;
+  object-position: top;
+}
+
+.gallery--wide .thumb {
+  aspect-ratio: 16 / 10;
+}
+
+.gallery--tall .thumb {
+  aspect-ratio: 9 / 16;
+}
+
+.thumb--empty {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-style: dashed;
+  color: var(--muted);
+  font-size: 0.85rem;
+}
+
+/* Botão "Ver detalhes": o ::after estica o clique para o card inteiro. */
+.card-open {
+  margin-top: auto;
+  padding: 0;
+  background: none;
+  border: 0;
+  color: var(--violet-soft);
+  font: inherit;
+  font-weight: 500;
+  cursor: pointer;
+}
+
+.card-open::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: 16px;
+}
+
+.card-open:focus-visible {
+  outline: none;
+}
+
+.card-open:focus-visible::after {
+  outline: 2px solid var(--violet-soft);
+  outline-offset: 3px;
+}
+
+.visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+}
+
+/* ---------- Janela de detalhes ---------- */
+
+.modal {
+  width: min(680px, calc(100vw - 32px));
+  max-height: calc(100vh - 48px);
+  padding: 0;
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: 16px;
+  color: var(--text);
+}
+
+.modal::backdrop {
+  background: rgba(4, 3, 8, 0.74);
+  backdrop-filter: blur(4px);
+}
+
+.modal[open] {
+  animation: modal-in 0.3s cubic-bezier(0.2, 0.7, 0.2, 1);
+}
+
+@keyframes modal-in {
+  from {
+    opacity: 0;
+    transform: translateX(-24px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+body:has(.modal[open]) {
+  overflow: hidden;
+}
+
+.modal-body {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 20px;
+  padding: 32px;
+}
+
+.modal-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+}
+
+.modal-close {
+  padding: 6px 14px;
+  background: none;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  color: var(--text);
+  font: inherit;
+  font-size: 0.9rem;
+  cursor: pointer;
+  transition: border-color 0.2s;
+}
+
+.modal-close:hover {
+  border-color: var(--violet);
+}
+
+.modal-description {
+  display: grid;
+  gap: 14px;
+  max-width: 60ch;
+}
+
+.modal-title {
+  align-self: stretch; 
+  text-align: center;  
+}
+
+.modal-body .card-links {
+  align-self: stretch; 
+}
+
+/* ---------- Contato ---------- */
+
+.contact-text {
+  max-width: 52ch;
+  margin-bottom: 32px;
+  color: var(--muted);
+}
+
+.contact-link {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 4px 16px;
+  padding: 20px 0;
+  border-bottom: 1px solid var(--line);
+  font-family: var(--font-display);
+  font-size: clamp(1.2rem, 3vw, 1.7rem);
+  font-weight: 500;
+  transition: color 0.2s;
+}
+
+.contact-link:hover {
+  color: var(--violet-soft);
+}
+
+.contact-value {
+  color: var(--muted);
+  overflow-wrap: anywhere;
+}
+
+/* ---------- Rodapé ---------- */
+
+.footer {
+  padding: 40px var(--gutter-right) 40px var(--content-left);
+  border-top: 1px solid var(--line);
+  color: var(--muted);
+  font-size: 0.9rem;
+}
+
+/* ---------- Telas pequenas ---------- */
+
+@media (max-width: 720px) {
+  :root {
+    --rail-x: 12px;
+    --content-left: 36px;
+    --gutter-right: 20px;
+  }
+
+  .header-name {
+    display: none;
+  }
+
+  .nav {
+    gap: 18px;
+  }
+
+  .section {
+    padding: 72px 0;
+  }
+
+  .projects-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .project-card {
+    padding: 22px;
+  }
+
+  .modal-body {
+    padding: 24px;
+  }
+}
+
+/* ---------- Movimento reduzido ---------- */
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  .reveal {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+
+  .modal[open] {
+    animation: none;
+  }
+}
